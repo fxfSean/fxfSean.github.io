@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="@[TOC](XTabLayout 修改选中标题大小且不换行) 遇到问题项目中使用XTabLayout+ViewPager 实现tab页切换的功能，正常的使用肯定没啥问题，XTabLayout已经给我们封装了很丰富的方法，直接可以在xml中设置样式。包括滑动样式、分割线、选中标题颜色、字体大小等等详细API可移步github地址遇到的问题是选中标题设置字体过大时，标题包含4个字和以上的就会换行，然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XTabLayout 修改选中标题大小且不换行">
+<meta property="og:url" content="http://yoursite.com/2020/05/17/XTabLayout%20%E4%BF%AE%E6%94%B9%E9%80%89%E4%B8%AD%E6%A0%87%E9%A2%98%E5%A4%A7%E5%B0%8F%E4%B8%94%E4%B8%8D%E6%8D%A2%E8%A1%8C/index.html">
+<meta property="og:site_name" content="付晓方">
+<meta property="og:description" content="@[TOC](XTabLayout 修改选中标题大小且不换行) 遇到问题项目中使用XTabLayout+ViewPager 实现tab页切换的功能，正常的使用肯定没啥问题，XTabLayout已经给我们封装了很丰富的方法，直接可以在xml中设置样式。包括滑动样式、分割线、选中标题颜色、字体大小等等详细API可移步github地址遇到的问题是选中标题设置字体过大时，标题包含4个字和以上的就会换行，然">
+<meta property="article:published_time" content="2020-05-17T02:41:52.165Z">
+<meta property="article:modified_time" content="2020-05-17T02:41:52.166Z">
+<meta property="article:author" content="付晓方">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/17/XTabLayout 修改选中标题大小且不换行/"/>
+
+
+
+
+
+  <title>XTabLayout 修改选中标题大小且不换行 | 付晓方</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71385fea182db54e1bba628491aabd5f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">付晓方</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/17/XTabLayout%20%E4%BF%AE%E6%94%B9%E9%80%89%E4%B8%AD%E6%A0%87%E9%A2%98%E5%A4%A7%E5%B0%8F%E4%B8%94%E4%B8%8D%E6%8D%A2%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="付晓方">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="付晓方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">XTabLayout 修改选中标题大小且不换行</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-17T10:41:52+08:00">
+                2020-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>@[TOC](XTabLayout 修改选中标题大小且不换行)</p>
+<h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>项目中使用XTabLayout+ViewPager 实现tab页切换的功能，正常的使用肯定没啥问题，XTabLayout已经给我们封装了很丰富的方法，直接可以在xml中设置样式。包括滑动样式、分割线、选中标题颜色、字体大小等等<br>详细API可移步github<br><a href="https://github.com/AndroidKun/XTabLayout" target="_blank" rel="noopener">地址</a><br>遇到的问题是选中标题设置字体过大时，标题包含4个字和以上的就会换行，然后就是字数少的一行，字数多的两行，样式显示相当尴尬。<br>然后这里记录一下自己的填坑之路，最后结果其实非常简单，着急的朋友可以直接跳到最后</p>
+<h1 id="XML使用"><a href="#XML使用" class="headerlink" title="XML使用"></a>XML使用</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.androidkun.xtablayout.XTabLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/xl_live_list"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"40dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">"@color/white"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:xTabDividerGravity</span>=<span class="string">"bottom"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:xTabIndicatorColor</span>=<span class="string">"@color/app_blue"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:xTabIndicatorHeight</span>=<span class="string">"2dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:xTabIndicatorWidth</span>=<span class="string">"15dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:xTabMode</span>=<span class="string">"scrollable"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:xTabSelectedTextColor</span>=<span class="string">"@color/app_blue"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:xTabSelectedBackgroundColor</span>=<span class="string">"@color/white"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:xTabSelectedTextSize</span>=<span class="string">"17sp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:xTabTextColor</span>=<span class="string">"@color/app_textcolor2"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:xTabTextSize</span>=<span class="string">"14sp"</span></span></span><br><span class="line"><span class="tag">        /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>属性常用的就上边这些，其中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:xTabTextSize&#x3D;&quot;14sp&quot;</span><br></pre></td></tr></table></figure>
+<p>表示未选中标题字体大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:xTabSelectedTextSize&#x3D;&quot;17sp&quot;</span><br></pre></td></tr></table></figure>
+<p>表示选中以后标题大小<br>可以看到选中以后标题比未选中的大，所以当tab滑到字数多一点的标签页时，就会换行。效果可以自行想象</p>
+<h1 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h1><ul>
+<li>首先先去找API里有没有设置单行的方法，结果没找到</li>
+<li>看源码换行原因<br>发现标签页的TabView 里设置了一个默认最大行数是2<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TabView</span> <span class="keyword">extends</span> <span class="title">LinearLayout</span> <span class="keyword">implements</span> <span class="title">OnLongClickListener</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> XTabLayout.Tab mTab; <span class="comment">//对外提供Tab标签</span></span><br><span class="line">        <span class="keyword">private</span> TextView mTextView; <span class="comment">// 标签内TextView 我们要处理的对象</span></span><br><span class="line">        <span class="keyword">private</span> ImageView mIconView;</span><br><span class="line">        <span class="keyword">private</span> View mCustomView;</span><br><span class="line">        <span class="keyword">private</span> TextView mCustomTextView;</span><br><span class="line">        <span class="keyword">private</span> ImageView mCustomIconView;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> mDefaultMaxLines = <span class="number">2</span>; <span class="comment">// 默认最大行数</span></span><br><span class="line">        ... </span><br><span class="line">        省略</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.mTextView != <span class="keyword">null</span>) &#123;</span><br><span class="line">                Resources res = <span class="keyword">this</span>.getResources();</span><br><span class="line">                <span class="keyword">float</span> textSize = XTabLayout.<span class="keyword">this</span>.mTabTextSize;</span><br><span class="line">                <span class="keyword">int</span> maxLines = <span class="keyword">this</span>.mDefaultMaxLines; <span class="comment">// 设置最大行数</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">this</span>.mIconView != <span class="keyword">null</span> &amp;&amp; <span class="keyword">this</span>.mIconView.getVisibility() == <span class="number">0</span>) &#123;</span><br><span class="line">                    maxLines = <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.mTextView != <span class="keyword">null</span> &amp;&amp; <span class="keyword">this</span>.mTextView.getLineCount() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                    textSize = XTabLayout.<span class="keyword">this</span>.mTabTextMultiLineSize;</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
+所以找的了换行的罪魁祸首就是，textview设置的默认最大行数为2行<br>找到了位置，我们就去想是不是可以通过反射设置默认行数禁止换行<br>上手撸<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> newTab = rootview.xl_live_add_course.newTab() <span class="keyword">as</span> XTabLayout.Tab <span class="comment">//创建标签页</span></span><br><span class="line">            <span class="keyword">val</span> field = XTabLayout.Tab::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>.<span class="title">getDeclaredField</span></span>(<span class="string">"mView"</span>)<span class="comment">//拿到TabView</span></span><br><span class="line">            <span class="keyword">val</span> tabView = Class.forName(<span class="string">"com.liqiang365.widget.xtablayout.XTabLayout<span class="subst">$&#123;<span class="string">'$'</span>&#125;</span>TabView"</span>)<span class="comment">// 反射创建内部类的TabView</span></span><br><span class="line">            <span class="keyword">val</span> defaultMaxLines = tabView.getDeclaredField(<span class="string">"mDefaultMaxLines"</span>)<span class="comment">//拿到默认最大行数</span></span><br><span class="line">            field.isAccessible = <span class="literal">true</span></span><br><span class="line">            defaultMaxLines.isAccessible = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">val</span> xTableView = field.<span class="keyword">get</span>(newTab)</span><br><span class="line">            <span class="keyword">val</span> tvField = tabView.getDeclaredField(<span class="string">"mTextView"</span>)<span class="comment">//拿到TextView</span></span><br><span class="line">            tvField.isAccessible = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">val</span> mTextView = tvField.<span class="keyword">get</span>(xTableView) <span class="keyword">as</span> TextView</span><br><span class="line">            defaultMaxLines.<span class="keyword">set</span>(xTableView, <span class="number">1</span>) <span class="comment">//设置最大行数1</span></span><br><span class="line">            rootview.xl_live_add_course.addTab(newTab.setText(bean.name))<span class="comment">// 添加tab</span></span><br></pre></td></tr></table></figure>
+其中拿到TabView到代码参考如下<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Tab</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INVALID_POSITION = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">private</span> Object mTag;</span><br><span class="line">        <span class="keyword">private</span> Drawable mIcon;</span><br><span class="line">        <span class="keyword">private</span> CharSequence mText;</span><br><span class="line">        <span class="keyword">private</span> CharSequence mContentDesc;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> mPosition;</span><br><span class="line">        <span class="keyword">private</span> View mCustomView;</span><br><span class="line">        <span class="keyword">private</span> XTabLayout mParent;</span><br><span class="line">        <span class="keyword">private</span> XTabLayout.TabView mView;</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+运行看下效果，换行问题解决了，但是显示了三个字然后后边加…<br>晕，肯定是位置不够肯定是设置了ellipsize=end<br>找到源码包含到资源文件果然是<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:ellipsize</span>=<span class="string">"end"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:gravity</span>=<span class="string">"center"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:maxLines</span>=<span class="string">"2"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+尴尬，然后去想设置布局中的TextView默认宽度加宽一点好了，就不会占满出现…了<br>xml中找属性发现了xTabPaddingStart 和 xTabPaddingEnd很好，一边来上-5dp<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app:xTabPaddingStart="-5dp"</span><br><span class="line">app:xTabPaddingEnd="-5dp"</span><br></pre></td></tr></table></figure>
+在看效果，完美解决<h1 id="最后方案"><a href="#最后方案" class="headerlink" title="最后方案"></a>最后方案</h1>实现完了以后又回过去复盘了一下，既然设置-5dp加宽了tab标签的宽度，之前换行、省略号那些的又都是因为宽度不够导致的，那么现在是不是可以不设置行数那些的一堆。验证一下把反射的代码注掉，只留padding，运行一下，果然可以。。。<br>乖乖的把反射代码删掉，整了半天白搞。</li>
+<li><em>所以最后的方法还是在xml中添加两个属性*</em><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app:xTabPaddingStart=<span class="string">"-5dp"</span></span><br><span class="line">app:xTabPaddingEnd=<span class="string">"-5dp"</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/05/hufuman/" rel="next" title="霍夫曼压缩">
+                <i class="fa fa-chevron-left"></i> 霍夫曼压缩
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="付晓方" />
+            
+              <p class="site-author-name" itemprop="name">付晓方</p>
+              <p class="site-description motion-element" itemprop="description">正心、修身</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到问题"><span class="nav-number">1.</span> <span class="nav-text">遇到问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XML使用"><span class="nav-number">2.</span> <span class="nav-text">XML使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决思路"><span class="nav-number">3.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后方案"><span class="nav-number">4.</span> <span class="nav-text">最后方案</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">付晓方</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
