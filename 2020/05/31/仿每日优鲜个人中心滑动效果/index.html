@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="动画,UI," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="效果展示Hello朋友们，大家好，今天我们来记录分享一下，每日优鲜个人中心的页面交互效果 大家有app的可以点开看一下效果，又是比较复杂的一个实现，之前我们也实现了一个比较复杂的功能就是仿抖音直播间内的侧滑功能，右滑清屏，左滑弹出列表，有兴趣的朋友可以点击链接查看仿抖音右滑清屏，左滑列表功能 好，我们就开始讲下今天实现的功能，先看下效果图 由于图片上传大小的限制，不能超过5M，所以时间压缩了很多，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="仿每日优鲜个人中心滑动效果">
+<meta property="og:url" content="http://yoursite.com/2020/05/31/%E4%BB%BF%E6%AF%8F%E6%97%A5%E4%BC%98%E9%B2%9C%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83%E6%BB%91%E5%8A%A8%E6%95%88%E6%9E%9C/index.html">
+<meta property="og:site_name" content="付晓方">
+<meta property="og:description" content="效果展示Hello朋友们，大家好，今天我们来记录分享一下，每日优鲜个人中心的页面交互效果 大家有app的可以点开看一下效果，又是比较复杂的一个实现，之前我们也实现了一个比较复杂的功能就是仿抖音直播间内的侧滑功能，右滑清屏，左滑弹出列表，有兴趣的朋友可以点击链接查看仿抖音右滑清屏，左滑列表功能 好，我们就开始讲下今天实现的功能，先看下效果图 由于图片上传大小的限制，不能超过5M，所以时间压缩了很多，">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200531100259846.gif">
+<meta property="article:published_time" content="2020-05-31T02:20:18.000Z">
+<meta property="article:modified_time" content="2020-05-31T02:22:47.287Z">
+<meta property="article:author" content="付晓方">
+<meta property="article:tag" content="动画">
+<meta property="article:tag" content="UI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200531100259846.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/31/仿每日优鲜个人中心滑动效果/"/>
+
+
+
+
+
+  <title>仿每日优鲜个人中心滑动效果 | 付晓方</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71385fea182db54e1bba628491aabd5f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">付晓方</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/31/%E4%BB%BF%E6%AF%8F%E6%97%A5%E4%BC%98%E9%B2%9C%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83%E6%BB%91%E5%8A%A8%E6%95%88%E6%9E%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="付晓方">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="付晓方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">仿每日优鲜个人中心滑动效果</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-31T10:20:18+08:00">
+                2020-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h1><p>Hello朋友们，大家好，今天我们来记录分享一下，每日优鲜个人中心的页面交互效果</p>
+<p>大家有app的可以点开看一下效果，又是比较复杂的一个实现，之前我们也实现了一个比较复杂的功能就是仿抖音直播间内的侧滑功能，右滑清屏，左滑弹出列表，有兴趣的朋友可以点击链接查看仿抖音右滑清屏，左滑列表功能</p>
+<p>好，我们就开始讲下今天实现的功能，先看下效果图<br><img src="https://img-blog.csdnimg.cn/20200531100259846.gif" alt="效果图"></p>
+<p>由于图片上传大小的限制，不能超过5M，所以时间压缩了很多，还有很多细节的地方没有体现到，不过没关系，后边给大家提供下Demo的链接，大家可以自己运行后体验一下</p>
+<p>这里我是用了两个图片简单做了下演示，实际使用换成具体的布局实现就可以了</p>
+<h1 id="功能分解"><a href="#功能分解" class="headerlink" title="功能分解"></a>功能分解</h1><p>可以看的这是一个滑动特效，滑动主要分为三个区域</p>
+<p>顶部TitleBar的显示隐藏<br>屏幕内的主要两部分，第一部分上滑<br>下边第二部分上滑下滑</p>
+<ul>
+<li>难点一</li>
+</ul>
+<p>其中顶部的Bar显示隐藏问题不大，都知道是用动画TranslateY上下移动就可以了，难点是下边的两个View</p>
+<p>上边View，后边我们称View1的速率跟下边View，下边简称View2的速率是不同的。View1的速度要比View2快</p>
+<p>在View2上上下滑动，View1总是更早的比View2先达到顶部和底部，但同时可以观察他们又是同步的，所以肯定是View1移动的</p>
+<p>距离跟View2是倍数的关系</p>
+<p>View2的下滑松开回弹也比较简单，设置动画的差值器为CycleInterpolator的即可</p>
+<blockquote>
+<p>拦截器方面跟大家分享一个在线调试的链接<a href="http://inloop.github.io/interpolator/" target="_blank" rel="noopener">http://inloop.github.io/interpolator/</a> 上边可以方便的调试拦截器的效果</p>
+</blockquote>
+<p>因为是动画TranslateY实现，所以就有很多边界需要处理，不能让View1向下滑超过顶部，不能让View2向上滑超过底部等等</p>
+<p>其实刚开始有想过用Scrollview实现，继承改变里边滑动逻辑，分别处理View1，View2，然后再对外提供scrollby的距离，让titlebar联动。这样就不用担心View1、View2有滑出边界的风险了。但是实现了一段时间，写了个demo发现实操的难点比想象的要大很多</p>
+<p>一个是以View2为单独的ScrollView处理的话是View2的滑动效果就比较流畅简单，但是要对外关联View1和TitleBar就比较麻烦了，并且，从原生App上效果来看，在View1上滑动View2也是有滑动效果的，这就更难处理了</p>
+<p>第二种方式是整体一个ScrollView处理，然后单独处理View1的滑动逻辑，实现上也没走通，因为View1单独处理的同时还要考虑ScrollView的滑动，它是在此基础上滑动的，View1的TranslateY肯定是不可控，做不到很流畅的效果，所以最后就放弃了Scrollview的方案，改为全动画实现了</p>
+<ul>
+<li>难点二</li>
+</ul>
+<p>动画实现的第二个难点是要模拟ScrollView的Fling效果，就是上滑一定速率松开后，view可以自己滑动一段距离。因为不是ScrollView实现，所以这部分肯定也是动画实现了。难点就是不同速度，Fling的效果是不一样的，这部分就不展开了，因为需要根据Demo效果体验，加上代码理解才能明白，大家就自己去看好了</p>
+<ul>
+<li>难点三</li>
+</ul>
+<p>Fling效果完了以后，判断当前Translate的距离，是不是超过一个分界线，超过了弹到顶部，没超过弹到底部。</p>
+<p>这里要注意一下，Fling执行完以后如果刚好在底部或顶部位置，就不要再执行回弹的动画了，多个判断，少执行些无用代码，也是平常编程是要注意的地方，虽然效果上看不出差别，但你心里要清楚它在那跑空代码，耗cpu呢</p>
+<ul>
+<li>难点四</li>
+</ul>
+<p>先向下滑动，再向上滑动，可以看到View1是立马跟着移动的，而不是等View2回到初始位置后开始移动，这就有点复杂了，如果View1直接根据View2的TranslateY移动是很明显达不到这一点的，因为View2的Translate是先大于0，逐渐增大，然后再小于0，逐渐变小，这里实现不好很不容易达到原生App实现的效果的，体验也差很多，非等View2回到原位后再开始移动View1。</p>
+<p>刚开始也是实现到这就卡住了，因为要重构代码，之前的实现方式肯定是达到不了这种效果了。</p>
+<p>重构的滑意味之前写好的滑动逻辑都要调整，就好像好不容易从一片荆棘里穿过来，一不小心发现走差道了，目的地在反方向，又要从头走一边的感觉。试了好几次也是差点放弃，好几次想revert的冲动，但是最后还是坚持下来了，还好没放弃</p>
+<p>最后看的满意的效果还是很欣慰的，而且看了每日优鲜IOS端的就没实现下滑后上滑立即跟随的效果，而是等View2回到原点后再跟随的滑动，这就让人更自豪了，开心😄！哈哈</p>
+<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>因为在View1和View2上滑动都有效果，所以肯定是在父ViewGroup里处理的事件分发逻辑，自定义ViewGroup重写onMeasure和onLayout方法，onInterceptTouchEvent方法里处理拦截事件，上下滑动时拦截事件。事件处理在onTouchEvent方法里，MotionEvent.ACTION_MOVE 事件的时候移动View</p>
+<p>这里因为要实现下滑后上滑及时滑动View1的效果，所以上下滑动的判断不能按传统比较Down事件里的差值，而要每次在MOVE事件里更新Down坐标点，我们换个名字叫mLastOffsetY，上次位移坐标</p>
+<p><strong>核心事件处理逻辑如下</strong>：</p>
+<p>首先是各种动画初始化用属性动画，View1、View2获取，边界限定</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">initView</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">//手势指示器初始化</span></span><br><span class="line">        mTouchLisener = ScrollTouchListener()</span><br><span class="line">        mDetector = GestureDetector(context, mTouchLisener)</span><br><span class="line"></span><br><span class="line">        mVelocityTracker = VelocityTracker.obtain()</span><br><span class="line"></span><br><span class="line">        mSecondAnimator = ValueAnimator.ofFloat(<span class="number">0f</span>, <span class="number">1f</span>).setDuration(<span class="number">1000</span>)</span><br><span class="line">        mSecondAnimator.addUpdateListener(ValueAnimator.AnimatorUpdateListener &#123; valueAnimator -&gt;</span><br><span class="line">            <span class="keyword">val</span> value = valueAnimator.animatedValue <span class="keyword">as</span> <span class="built_in">Float</span></span><br><span class="line">            Log.e(TAG,<span class="string">"second执行 <span class="variable">$value</span> transY:<span class="subst">$&#123;mSecondChild.translationY&#125;</span>"</span>)</span><br><span class="line">            <span class="keyword">if</span> (isDownFirstThenUp)</span><br><span class="line">                translateFirst(firstStartY + (value * (firstEndY - firstStartY)))</span><br><span class="line">            translateSecond(secondStartY + (value * (secondEndY - secondStartY)) - mSecondChild.translationY)</span><br><span class="line">        &#125;)</span><br><span class="line">        mSecondAnimator.addListener(<span class="keyword">object</span> : AnimatorListenerAdapter() &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAnimationStart</span><span class="params">(animation: <span class="type">Animator</span>)</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAnimationEnd</span><span class="params">(animation: <span class="type">Animator</span>)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        mSecondFlingAnimator = ValueAnimator.ofFloat(<span class="number">0f</span>, <span class="number">1f</span>).setDuration(<span class="number">200</span>)</span><br><span class="line">        mSecondFlingAnimator.addUpdateListener(ValueAnimator.AnimatorUpdateListener &#123; valueAnimator -&gt;</span><br><span class="line">            <span class="keyword">val</span> value = valueAnimator.animatedValue <span class="keyword">as</span> <span class="built_in">Float</span></span><br><span class="line">            Log.e(TAG,<span class="string">"fling执行<span class="variable">$value</span> transY:<span class="subst">$&#123;mSecondChild.translationY&#125;</span>"</span>)</span><br><span class="line">            translateSecond(secondStartY + (value * (secondEndY - secondStartY)) - mSecondChild.translationY)</span><br><span class="line">        &#125;)</span><br><span class="line">        mSecondFlingAnimator.addListener(<span class="keyword">object</span> : AnimatorListenerAdapter() &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAnimationStart</span><span class="params">(animation: <span class="type">Animator</span>)</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAnimationEnd</span><span class="params">(animation: <span class="type">Animator</span>)</span></span> &#123;</span><br><span class="line">                Log.e(TAG,<span class="string">"fling 完成 <span class="variable">$firstTranslateY</span>"</span>)</span><br><span class="line">                <span class="keyword">if</span> (isAllAnimCancel) &#123;</span><br><span class="line">                    Log.e(TAG,<span class="string">"********"</span>)</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> ( secondTranslateY &gt; -boundaryLine) &#123;</span><br><span class="line">                    <span class="comment">// 向上滑，未超过分界线抬起,到底部</span></span><br><span class="line">                    setPivotStart()</span><br><span class="line">                    mSecondAnimator.interpolator = DecelerateInterpolator(<span class="number">3f</span>)</span><br><span class="line">                    mSecondAnimator.start()</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (secondTranslateY &lt; -boundaryLine &amp;&amp; abs(secondTranslateY) &lt; abs(secondCanMaxUp)) &#123;</span><br><span class="line">                    <span class="comment">// 向上滑超过分界线抬起，到顶部</span></span><br><span class="line">                    setPivotEnd()</span><br><span class="line">                    mSecondAnimator.interpolator = DecelerateInterpolator(<span class="number">2f</span>)</span><br><span class="line">                    mSecondAnimator.start()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获得 First 和 Second 子View</span></span><br><span class="line"><span class="comment">     * 获得可移动的最大距离，根据xml中值设定</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAttachedToWindow</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onAttachedToWindow()</span><br><span class="line">        Log.e(TAG, <span class="string">"onAttach"</span>)</span><br><span class="line">        mFirstChild = getChildAt(<span class="number">0</span>)</span><br><span class="line">        mSecondChild = getChildAt(<span class="number">1</span>)</span><br><span class="line">        mSecondChild.post &#123;</span><br><span class="line">            secondCanMaxDown = dp2px(context, <span class="number">60</span>)</span><br><span class="line">            secondCanMaxUp =</span><br><span class="line">                mSecondChild.height - measuredHeight - mSecondChild.top.toFloat() - secondCanMaxDown</span><br><span class="line">            firstCanMaxUp = -mFirstChild.height.toFloat() - <span class="number">20</span></span><br><span class="line">            boundaryLine = dp2px(context, <span class="number">130</span>)</span><br><span class="line">            barViewCanMaxDown = dp2px(context,<span class="number">90</span>)</span><br><span class="line">            Log.e(TAG, <span class="string">"最大移动：<span class="variable">$secondCanMaxUp</span>"</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mShakeAnimator = ObjectAnimator.ofFloat(mSecondChild,<span class="string">"translationY"</span>,<span class="number">0f</span>,-<span class="number">5f</span>)</span><br><span class="line">        mShakeAnimator.duration = <span class="number">500</span></span><br><span class="line">        mShakeAnimator.interpolator = CycleInterpolator(<span class="number">2.5f</span>)</span><br><span class="line"></span><br><span class="line">        mAlphaAnimator = ObjectAnimator.ofFloat(mFirstChild,<span class="string">"Alpha"</span>,<span class="number">0.2f</span>,<span class="number">1f</span>)</span><br><span class="line">        mAlphaAnimator.duration = <span class="number">800</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>其次是拦截事件</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onInterceptTouchEvent</span><span class="params">(event: <span class="type">MotionEvent</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">val</span> x = event.rawX.toInt()</span><br><span class="line">        <span class="keyword">val</span> y = event.rawY.toInt()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">when</span> (event.action) &#123;</span><br><span class="line">            MotionEvent.ACTION_DOWN -&gt; &#123;</span><br><span class="line">                mDownX = x</span><br><span class="line">                mDownY = y</span><br><span class="line">                mLastOffsetY = y</span><br><span class="line">                Log.e(TAG, <span class="string">"按下 <span class="variable">$mDownY</span>"</span>)</span><br><span class="line">                isBombing = <span class="literal">false</span></span><br><span class="line">                <span class="keyword">if</span> (mFirstChild.translationY == <span class="number">0f</span>)</span><br><span class="line">                    isDownFirstThenUp = <span class="literal">false</span></span><br><span class="line">                isAllAnimCancel = <span class="literal">true</span></span><br><span class="line">                <span class="keyword">if</span> (animatorSet.isRunning)&#123;</span><br><span class="line">                    animatorSet.cancel()</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (mSecondAnimator.isRunning) &#123;</span><br><span class="line">                    mSecondAnimator.cancel()</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (mSecondFlingAnimator.isRunning) &#123;</span><br><span class="line">                    mSecondFlingAnimator.cancel()</span><br><span class="line">                &#125;</span><br><span class="line">                isAllAnimCancel = <span class="literal">false</span></span><br><span class="line">                Log.e(TAG,<span class="string">"-------"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            MotionEvent.ACTION_MOVE -&gt; &#123;</span><br><span class="line">                <span class="keyword">if</span> ( <span class="number">0</span> &lt; abs(y - mDownY)) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            MotionEvent.ACTION_UP -&gt; &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onInterceptTouchEvent(event)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 拦截事件里按下时要处理停止所有动画，模拟ScrollView滑动过程中按下停止</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onTouchEvent</span><span class="params">(event: <span class="type">MotionEvent</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        mDetector!!.onTouchEvent(event)</span><br><span class="line">        mVelocityTracker.addMovement(event)</span><br><span class="line">        mVelocityTracker.computeCurrentVelocity(<span class="number">10</span>)</span><br><span class="line">        <span class="keyword">val</span> y = event!!.rawY.toInt()</span><br><span class="line">        <span class="keyword">val</span> offsetY = y - mLastOffsetY</span><br><span class="line"></span><br><span class="line">        <span class="keyword">when</span> (event.action) &#123;</span><br><span class="line">            MotionEvent.ACTION_MOVE -&gt; &#123;</span><br><span class="line">                mLastOffsetY = y</span><br><span class="line">                <span class="keyword">if</span> (offsetY &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                    isScrollDownDirectly = <span class="literal">false</span></span><br><span class="line">                    <span class="comment">// 向上滑动</span></span><br><span class="line">                    <span class="keyword">if</span> (mSecondChild.translationY &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                        isDownFirstThenUp = <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    translateSecond(offsetY.toFloat() )</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (offsetY &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="comment">// 向下滑动</span></span><br><span class="line">                    translateSecond(offsetY.toFloat() )</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (offsetY &gt; <span class="number">0</span> &amp;&amp; overCrossBoundary() &amp;&amp;</span><br><span class="line">                    !mAlphaAnimator.isRunning &amp;&amp;</span><br><span class="line">                    !isScrollDownDirectly &amp;&amp;</span><br><span class="line">                        mTitleBarView.translationY &gt; abs(barViewCanMaxDown) - <span class="number">30</span>)&#123;</span><br><span class="line">                    <span class="comment">// alpha正在执行时不执行 &amp;&amp; 重复下滑不执行（下滑再上滑后再执行）&amp;&amp; 超过一定高度再执行</span></span><br><span class="line">                    mAlphaAnimator.start()</span><br><span class="line">                    isScrollDownDirectly = <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            MotionEvent.ACTION_UP -&gt; &#123;</span><br><span class="line">                Log.e(TAG, <span class="string">"抬起：<span class="variable">$secondTranslateY</span>"</span>)</span><br><span class="line">                <span class="comment">// Fling 执行时先执行Fling</span></span><br><span class="line">                <span class="keyword">if</span> (mSecondFlingAnimator.isRunning)</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (secondTranslateY &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="comment">// 向下滑抬起</span></span><br><span class="line">                    Log.e(TAG,<span class="string">"下滑动画：<span class="variable">$isDownFirstThenUp</span>"</span>)</span><br><span class="line">                    isBombing = <span class="literal">true</span></span><br><span class="line">                    setPivotStart()</span><br><span class="line">                    mSecondAnimator.interpolator = AccelerateDecelerateInterpolator()</span><br><span class="line">                    animatorSet.play(mShakeAnimator).after(mSecondAnimator)</span><br><span class="line">                    animatorSet.start()</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (abs(secondTranslateY) &lt; abs(boundaryLine)) &#123;</span><br><span class="line">                    <span class="comment">// 向上滑，未超过分界线抬起</span></span><br><span class="line">                    Log.e(TAG,<span class="string">"回弹动画："</span>)</span><br><span class="line">                    setPivotStart()</span><br><span class="line">                    mSecondAnimator.interpolator = AccelerateDecelerateInterpolator()</span><br><span class="line">                    mSecondAnimator.start()</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (abs(secondTranslateY) &gt; abs(boundaryLine)) &#123;</span><br><span class="line">                    <span class="comment">// 向上滑超过分界线抬起</span></span><br><span class="line">                    Log.e(TAG,<span class="string">"顶部动画："</span>)</span><br><span class="line">                    setPivotEnd()</span><br><span class="line">                    mSecondAnimator.duration = <span class="number">200</span></span><br><span class="line">                    mSecondAnimator.interpolator = AccelerateDecelerateInterpolator()</span><br><span class="line">                    mSecondAnimator.start()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里还要监听Fling事件所以要实现自定义手势监听类</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 自定义手势监听类</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">ScrollTouchListener</span> : <span class="type">GestureDetector.OnGestureListener &#123;</span></span></span><br><span class="line">        <span class="comment">//按下事件</span></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDown</span><span class="params">(e: <span class="type">MotionEvent</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//单击事件</span></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onShowPress</span><span class="params">(e: <span class="type">MotionEvent</span>)</span></span> &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//手指抬起事件</span></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSingleTapUp</span><span class="params">(e: <span class="type">MotionEvent</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//滚动事件</span></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onScroll</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            e1: <span class="type">MotionEvent</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            e2: <span class="type">MotionEvent</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            distanceX: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            distanceY: <span class="type">Float</span></span></span></span><br><span class="line"><span class="function"><span class="params">        )</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">            Log.e(TAG, <span class="string">"Y: <span class="variable">$distanceY</span>"</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//长按事件</span></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onLongPress</span><span class="params">(e: <span class="type">MotionEvent</span>)</span></span> &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//滑动事件</span></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onFling</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            e1: <span class="type">MotionEvent</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            e2: <span class="type">MotionEvent</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            velocityX: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            velocityY: <span class="type">Float</span></span></span></span><br><span class="line"><span class="function"><span class="params">        )</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">            Log.e(TAG, <span class="string">"fling: <span class="variable">$velocityY</span>"</span>)</span><br><span class="line">            <span class="keyword">if</span> (abs(mVelocityTracker.yVelocity) &gt; <span class="number">5</span> &amp;&amp; mFirstChild.translationY != <span class="number">0f</span>)</span><br><span class="line">                simulateFling(velocityY)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>初始化的时候监听手势：</p>
+<p>​    </p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//手势指示器初始化</span></span><br><span class="line">    mTouchLisener = ScrollTouchListener()</span><br><span class="line">    mDetector = GestureDetector(context, mTouchLisener)</span><br></pre></td></tr></table></figure>
+
+<p>动画模拟Fling的代码</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 模拟Fling</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">simulateFling</span><span class="params">(fling: <span class="type">Float</span>)</span></span> &#123;</span><br><span class="line">        Log.e(TAG, <span class="string">"速度：<span class="subst">$&#123;mVelocityTracker.yVelocity&#125;</span>"</span>)</span><br><span class="line">        secondStartY = mSecondChild.translationY</span><br><span class="line">        <span class="keyword">if</span> (abs(mVelocityTracker.yVelocity) &lt; <span class="number">30</span>)&#123;</span><br><span class="line">            secondEndY = secondTranslateY + fling / <span class="number">10</span></span><br><span class="line">            mSecondFlingAnimator.interpolator = DecelerateInterpolator(<span class="number">2f</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            mSecondFlingAnimator.interpolator = DecelerateInterpolator(<span class="number">1f</span>)</span><br><span class="line">            secondEndY = secondTranslateY + fling / <span class="number">5</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (secondEndY &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            secondEndY = <span class="number">0f</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (secondEndY &lt; secondCanMaxUp) &#123;</span><br><span class="line">            secondEndY = secondCanMaxUp</span><br><span class="line">        &#125;</span><br><span class="line">        mSecondFlingAnimator.duration = getRangeOfDuration(mVelocityTracker.yVelocity)</span><br><span class="line">        mSecondFlingAnimator.start()</span><br><span class="line">        Log.e(TAG,<span class="string">"fling 开始执行"</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>里边要根据速度值决定Fling位置的长短还有Fling时间长短，速率决定时间的代码</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 不同速率返回时间段</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">getRangeOfDuration</span><span class="params">(velocityY: <span class="type">Float</span>)</span></span>: <span class="built_in">Long</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> duration = <span class="number">0</span></span><br><span class="line">        <span class="keyword">val</span> speed = abs(velocityY)</span><br><span class="line">        <span class="keyword">if</span> (speed &gt; <span class="number">100</span>) &#123;</span><br><span class="line">            duration = <span class="number">40</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (speed &gt; <span class="number">80</span> &amp;&amp; speed &lt; <span class="number">100</span>) &#123;</span><br><span class="line">            duration = <span class="number">100</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (speed &gt; <span class="number">50</span> &amp;&amp; speed &lt; <span class="number">80</span>) &#123;</span><br><span class="line">            duration = <span class="number">250</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (speed &lt; <span class="number">50</span>) &#123;</span><br><span class="line">            duration = <span class="number">500</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> duration.toLong()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>每个值都是一遍一遍调试感觉修改整好的，你如果觉得体验不好也可以自己继续修改值直到自己满意为止</p>
+<p>最主要的，移动View1、View2的代码</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 移动First</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">translateFirst</span><span class="params">(distanceY: <span class="type">Float</span>)</span></span>&#123;</span><br><span class="line">        firstTranslateY = distanceY</span><br><span class="line">        Log.e(TAG,<span class="string">"第一个View: <span class="variable">$distanceY</span>"</span>)</span><br><span class="line">        <span class="keyword">if</span> (Math.abs(firstTranslateY) &lt;= Math.abs(firstCanMaxUp)) &#123;</span><br><span class="line">            <span class="comment">// 未超过最大距离</span></span><br><span class="line">            <span class="keyword">if</span> (distanceY &lt; <span class="number">0</span> || mFirstChild.translationY &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">//上滑 || 已经上滑一段距离</span></span><br><span class="line">                Log.e(TAG,<span class="string">"执行了"</span>)</span><br><span class="line">                mFirstChild.translationY = firstTranslateY</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//超过时置0</span></span><br><span class="line">                mFirstChild.translationY = <span class="number">0f</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 移动Second</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">translateSecond</span><span class="params">(distanceY: <span class="type">Float</span>)</span></span> &#123;</span><br><span class="line">        <span class="comment">// second 移动距离 计算 = 滑动距离 + 当前移动距离</span></span><br><span class="line">        secondTranslateY = distanceY + mSecondChild.translationY</span><br><span class="line"></span><br><span class="line">        <span class="comment">// first 移动距离</span></span><br><span class="line">        firstTranslateY = distanceY * <span class="number">1.3f</span> + mFirstChild.translationY</span><br><span class="line">        Log.e(TAG,<span class="string">"distanceY: <span class="variable">$distanceY</span>"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 没超过最大距离 &amp;&amp; 不是回弹动画 &amp;&amp; (不是先下滑后上滑的情况)</span></span><br><span class="line">        <span class="keyword">if</span> (Math.abs(firstTranslateY) &lt;= Math.abs(firstCanMaxUp)</span><br><span class="line">            &amp;&amp; !isBombing</span><br><span class="line">            &amp;&amp; (!mSecondAnimator.isRunning || !isDownFirstThenUp)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (distanceY &lt; <span class="number">0</span> || firstTranslateY &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 移动first</span></span><br><span class="line">                mFirstChild.translationY = firstTranslateY</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                mFirstChild.translationY = <span class="number">0f</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        barViewTranslateY = secondTranslateY * <span class="number">0.5f</span></span><br><span class="line">        <span class="keyword">if</span> (abs(barViewTranslateY) &gt; abs(barViewCanMaxDown)) &#123;</span><br><span class="line">            barViewTranslateY = -barViewCanMaxDown.toFloat()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mSecondChild.translationY &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            barViewTranslateY = <span class="number">0f</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (secondTranslateY &gt; <span class="number">0</span> &amp;&amp; secondTranslateY &gt; secondCanMaxDown) &#123;</span><br><span class="line">            <span class="comment">// second超过底部</span></span><br><span class="line">            secondTranslateY = secondCanMaxDown.toFloat()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (distanceY &lt; <span class="number">0</span> &amp;&amp; Math.abs(secondTranslateY) &gt;= Math.abs(secondCanMaxUp)) &#123;</span><br><span class="line">            <span class="comment">// second超过顶部</span></span><br><span class="line">            secondTranslateY = secondCanMaxUp</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">val</span> percent = abs(barViewTranslateY) / mTitleBarView.height</span><br><span class="line">        mTitleBarView.alpha = percent</span><br><span class="line">        <span class="comment">// 移动barView</span></span><br><span class="line">        mTitleBarView.translationY = -barViewTranslateY</span><br><span class="line">        <span class="comment">// 移动second</span></span><br><span class="line">        mSecondChild.translationY = secondTranslateY</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>里边一堆判断，都是各种限制，边界判断，分情况等等的。都是一边体验效果，一边加条件判断，一边修改优化，细活</p>
+<p>最后给大家附上链接</p>
+<p><a href="https://github.com/fxfSean/SmartScrollview" target="_blank" rel="noopener">GitHub地址</a></p>
+<p>您的点赞是我持续输出写作的动力，写文章用了我三个小时的时间，如果对您有帮助，请花一秒钟的时间给我点点关注，点点赞，谢谢同学们了！！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag"># 动画</a>
+          
+            <a href="/tags/UI/" rel="tag"># UI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/17/XTabLayout%20%E4%BF%AE%E6%94%B9%E9%80%89%E4%B8%AD%E6%A0%87%E9%A2%98%E5%A4%A7%E5%B0%8F%E4%B8%94%E4%B8%8D%E6%8D%A2%E8%A1%8C/" rel="next" title="XTabLayout修改选中标题大小且不换行">
+                <i class="fa fa-chevron-left"></i> XTabLayout修改选中标题大小且不换行
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="付晓方" />
+            
+              <p class="site-author-name" itemprop="name">付晓方</p>
+              <p class="site-description motion-element" itemprop="description">正心、修身</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#效果展示"><span class="nav-number">1.</span> <span class="nav-text">效果展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#功能分解"><span class="nav-number">2.</span> <span class="nav-text">功能分解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现思路"><span class="nav-number">3.</span> <span class="nav-text">实现思路</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">付晓方</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
